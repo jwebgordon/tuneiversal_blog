@@ -52,6 +52,10 @@
       return console.log("post_view initialize " + (this.model.get("title")));
     };
 
+    PostView.prototype.parse_url = function(url) {
+      return url.split('v=')[1].split('&')[0];
+    };
+
     PostView.prototype.play = function() {
       console.log("clicked play " + (this.model.get("title")));
       this.song_ready = new $.Deferred();
@@ -61,7 +65,6 @@
           return function(data, textStatus, jqXHR) {
             var body;
             body = "<div id='body-mock'>" + data.replace(/^[\s\S]*<body.*?>|<\/body>[\s\S]*$/g, "") + "</div>";
-            console.log($(body).find(".youtube-url").text());
             _this.model.set({
               youtube_url: $(body).find(".youtube-url").text()
             });
@@ -76,7 +79,7 @@
       });
       return this.song_ready.done((function(_this) {
         return function() {
-          return console.log(_this.model.get("youtube_url"));
+          return Tuneiversal.yPlayer.loadVideoById(_this.parse_url(_this.model.get("youtube_url")));
         };
       })(this));
     };
