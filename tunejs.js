@@ -2,7 +2,8 @@
 (function() {
   var BlogView, PlayerView, Post, PostView, Posts,
     __hasProp = {}.hasOwnProperty,
-    __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
+    __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
+    __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
 
   window.Tuneiversal = {
     Models: {},
@@ -131,6 +132,7 @@
     __extends(PlayerView, _super);
 
     function PlayerView() {
+      this.player_state_change = __bind(this.player_state_change, this);
       return PlayerView.__super__.constructor.apply(this, arguments);
     }
 
@@ -170,9 +172,12 @@
       var current_state;
       current_state = Tuneiversal.yPlayer.getPlayerState();
       if (current_state === 1) {
-        return $(".play-button").css("background-image", "url('http://www.tuneiversal.com/hs-fs/hub/160982/file-630196930-png/images/player_controls/pause.png')");
+        this.show_player();
+        $(".play-button").css("background-image", "url('http://www.tuneiversal.com/hs-fs/hub/160982/file-630196930-png/images/player_controls/pause.png')");
+        return this.inter_id = setInterval(this.update_progress, 100);
       } else {
-        return $(".play-button").css("background-image", "url('http://www.tuneiversal.com/hs-fs/hub/160982/file-625113038-png/images/player_controls/play.png')");
+        $(".play-button").css("background-image", "url('http://www.tuneiversal.com/hs-fs/hub/160982/file-625113038-png/images/player_controls/play.png')");
+        return clearInterval(this.inter_id);
       }
     };
 
@@ -192,6 +197,17 @@
     };
 
     PlayerView.prototype.next_track = function() {};
+
+    PlayerView.prototype.update_progress = function() {
+      var percent, percent_str;
+      percent = (Tuneiversal.yPlayer.getCurrentTime() / Tuneiversal.yPlayer.getDuration()) * 100;
+      percent_str = "" + percent + "%";
+      return $(".player-container").find('.progress-bar').css('width', "" + percent_str);
+    };
+
+    PlayerView.prototype.show_player = _.once(function() {
+      return $(this.el).show();
+    });
 
     return PlayerView;
 

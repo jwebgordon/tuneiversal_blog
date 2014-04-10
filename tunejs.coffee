@@ -92,12 +92,15 @@ class PlayerView extends Backbone.View
    player_ready: ->
       console.log "player_ready"
 
-   player_state_change: ->
+   player_state_change: =>
       current_state = Tuneiversal.yPlayer.getPlayerState()
       if current_state == 1
+         @show_player()
          $(".play-button").css("background-image", "url('http://www.tuneiversal.com/hs-fs/hub/160982/file-630196930-png/images/player_controls/pause.png')")
+         @inter_id = setInterval @update_progress, 100
       else
          $(".play-button").css("background-image", "url('http://www.tuneiversal.com/hs-fs/hub/160982/file-625113038-png/images/player_controls/play.png')")
+         clearInterval @inter_id
 
    play_pause: ->
       console.log "play_pause called"
@@ -111,6 +114,14 @@ class PlayerView extends Backbone.View
       Tuneiversal.yPlayer.stopVideo()
 
    next_track: ->
+
+   update_progress: ->
+      percent = (Tuneiversal.yPlayer.getCurrentTime()/Tuneiversal.yPlayer.getDuration())*100
+      percent_str = "#{percent}%"
+      $(".player-container").find('.progress-bar').css 'width', "#{percent_str}"
+
+   show_player: _.once () ->
+      $(@el).show()
 
 
 Tuneiversal.Views.player_view = new PlayerView

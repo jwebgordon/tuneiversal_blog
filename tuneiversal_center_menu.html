@@ -15,47 +15,10 @@
     <title>{{ page_meta.html_title }}</title>
     {% if site_settings.favicon_src %}
     <link rel="shortcut icon" href="//cdn2.hubspot.net/hub/160982/{{ site_settings.favicon_src }}" />{% endif %} {{ standard_header_includes }} {% style %}
-    // <script>
-    //     var tag = document.createElement('script');
-
-    //   tag.src = "https://www.youtube.com/iframe_api";
-    //   var firstScriptTag = document.getElementsByTagName('script')[0];
-    //   firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-      
-    //   var player;
-      // function onYouTubeIframeAPIReady() {
-      //   player = new YT.Player('player', {
-      //     height: '390',
-      //     width: '640',
-      //     videoId: 'M7lc1UVf-VE',
-      //     events: {
-      //       'onReady': onPlayerReady,
-      //       'onStateChange': onPlayerStateChange
-      //     }
-      //   });
-      // }
-      
-    //   function onPlayerReady(event) {
-    //     //event.target.playVideo();
-    //   }
-      
-    //   var done = false;
-    //   function onPlayerStateChange(event) {
-    //     if (event.data == YT.PlayerState.PLAYING && !done) {
-    //       setTimeout(stopVideo, 6000);
-    //       done = true;
-    //     }
-    //   }
-    //   function stopVideo() {
-    //     player.stopVideo();
-    //   }
-    // </script>
 </head>
 
 <body class=" {{ builtin_body_classes }}" style="">
-<div class="youtube-url">
-                {% text "youtube" label='Youtube URL', value="URL HERE", export_to_template_context=True, overrideable=True %}
-</div>
+<div class="youtube-url">{% text "youtube" label='Youtube URL', value="URL HERE", export_to_template_context=False, overrideable=True, no_wrapper=True %}</div>
 <div class="top-outer">
   <div class="row-fluid top-container" data-0="background-position: 50% 0px" data-400="background-position: 50% -400px;">
     <div class="span12 top"  data-0="-webkit-transform: translateY(0px);" data-400="-webkit-transform: translateY(-100px);">
@@ -88,39 +51,19 @@
             {% for content in contents %}
             <div class="post item">
                 <div class="item-inner">
-                    <h3 class="post-title">{{ content.name }}</h3>
-                    <h6 class="author">By <a class="author-link" href="{{ group.absolute_url }}/author/{{ content.blog_post_author.slug }}">{{ content.blog_post_author.full_name }}</a> - {{ content.publish_date_local_time|datetimeformat('%b %d %Y') }}</h6>
-                    <p>{{ content.post_list_content|safe }}</p>
-                    <div class="play-track" data-url="{{ content.absolute_url }}">Play It</div>
+                    <div class="title-wrapper">
+                        <h3 class="post-title">{{ content.name }}</h3>    
+                    </div>  
+                    <div class="author-wrapper">
+                        <h6 class="author">By <a class="author-link" href="{{ group.absolute_url }}/author/{{ content.blog_post_author.slug }}">{{ content.blog_post_author.full_name }}</a> - {{ content.publish_date_local_time|datetimeformat('%b %d %Y') }}</h6>
+                    </div>
+                    <div class="content-wrapper">
+                        <p>{{ content.post_list_content|safe }}</p>    
+                    </div>
+                    <div class="play-track btn btn-play" data-url="{{ content.absolute_url }}"><span class="glyphicon glyphicon-play"></span>Play It</div>
                 </div>
             </div>
             {% endfor %}
-            <div class="post item">
-                <h3>Post header</h3>
-                <p>Post body Post body Post body Post body Post body Post body </p>
-            </div>
-            <div class="post item">
-                <h3>Post header</h3>
-                <p>Post body Post body Post body Post body Post body Post body </p>
-            </div>
-            <div class="post item">
-                <h3>Post header</h3>
-                <p>Post body Post body Post body Post body Post body Post body </p>
-            </div>
-            <div class="post item">
-                <h3>Post header</h3>
-                <p>Post body Post body Post body Post body Post body Post body </p>
-            </div>
-            <div class="post item">
-                <h3>Post header</h3>
-                <p>Post body Post body Post body Post body Post body Post body </p>
-            </div>
-            <div class="post item">
-                <h3>Post header</h3>
-                <p>Post body Post body Post body Post body Post body Post body </p>
-            </div>
-        
-        
     </div>
     <div class="blog-pagination">
         {% if last_page_num %}
@@ -137,30 +80,15 @@
         <div class="span4 widget-span widget-type-rich_text about-blog">
             {% widget_block rich_text "about_this_blog" has_rows=False, label='About this blog', overrideable=False, __key='0', params_str="overrideable=False, label='About this blog' ", is_row=False %} 
             {% widget_attribute "html" %}
-            <h2>Something Powerful</h2>
-            <h3>Tell The Reader More</h3>
-            <p>The headline and subheader tells us what you're <a href="#">offering</a>, and the form header closes the deal. Over here you can explain why your offer is so great it's worth filling out a form for.</p>
-            <p>Remember:</p>
-            <ul>
-                <li>Bullets are great</li>
-                <li>For spelling out <a href="#">benefits</a> and</li>
-                <li>Turning visitors into leads.</li>
-            </ul>
+            <p>Tuneiversal is all about posting awesome new music, no matter what genre. Wiz Khalifa has a new song out? Come find it here. Mumford and Sons just released a new album? Come read about is and listen to some songs here. Some old Beethoven B-Sides were just discovered? That you might not find here. But short of that, Tunieversal will post it!</p>
+            <p>Come check out all the artists you love, and hopefully find some new favorites too!</p>
             {% end_widget_attribute %} 
             {% end_widget_block %}
         </div>
         <div class="span4 widget-span widget-type-rich_text social">
             {% widget_block rich_text "social_links" has_rows=False, label='Social Links', overrideable=False, __key='0', params_str="overrideable=False, label='Social Links' ", is_row=False %} 
             {% widget_attribute "html" %}
-            <h2>Something Powerful</h2>
-            <h3>Tell The Reader More</h3>
-            <p>The headline and subheader tells us what you're <a href="#">offering</a>, and the form header closes the deal. Over here you can explain why your offer is so great it's worth filling out a form for.</p>
-            <p>Remember:</p>
-            <ul>
-                <li>Bullets are great</li>
-                <li>For spelling out <a href="#">benefits</a> and</li>
-                <li>Turning visitors into leads.</li>
-            </ul>
+            <h2>Follow Us!</h2>
             {% end_widget_attribute %} 
             {% end_widget_block %}
         </div>
@@ -202,9 +130,10 @@
             <div class="play-button control span1"></div>
             <div class="stop-button control span1"></div>
             <div class="next-button control span1"></div>
-            <div class="progress-bar control span6">
-                <div class="progress">
-                    <div class="bar" style="width: 60%;"></div>
+            <div class="progress span9 track-progress">
+                <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
+                    <span class="sr-only">60% Complete</span>
+                  </div>
                 </div>
             </div>
         </div>
