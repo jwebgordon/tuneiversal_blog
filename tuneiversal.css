@@ -9,6 +9,7 @@
 html body {
     background: #37352B;
     margin: 0px;
+    height: 0px!important;
 }
 
 /***** TOP ******/
@@ -108,8 +109,7 @@ html body {
 }
 
 .menu ul li a:hover{
-    color: #fff;
-    background:#007AB0;
+    color: #007AB0!important;
 }
 
 .center-menu{
@@ -153,6 +153,7 @@ html body {
 .posts-wrapper .item .item-inner{
     min-height: 200px;
     text-align: center;
+    position: relative;
 }
 
 .post.item:nth-child(even){
@@ -172,12 +173,17 @@ html body {
 }
 
 .title-wrapper{
-    height: 25px;
+    min-height: 25px;
 }
 
 .post-title{
     color: #fff;
     font-weight: 400;
+    font-size: 20px;
+}
+
+.post-title::first-line{
+    font-size: 1.3em;
 }
 
 .author-wrapper{
@@ -189,7 +195,7 @@ html body {
 }
 
 .content-wrapper{
-    height: 80px;
+    height: 70px;
     line-height: 80px;
     color: #fff;
     padding: 4px;
@@ -210,20 +216,57 @@ html body {
     max-width: 80%;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 50px;
+    margin-top: 150px;
+    padding-top: 20px;
+    border-top: 1px solid #fff;
 }
 
 .about-blog{
-    color: #14679d;
+    color: #fff;
 }
 
 .social{
     text-align: center;
-    color: #14679d;
+    color: #fff;
 }
 
 .blog-subscribe{
-    color: #14679d;
+    color: #fff;
+}
+
+.blog-subscribe .hs-button{
+    display: inline-block;
+    margin-bottom: 0;
+    font-weight: normal;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    background-image: none;
+    background-color: #007AB0;
+    margin-top: 8px;
+    border: 1px solid transparent;
+    white-space: nowrap;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.blog-subscribe input{
+    border: 2px solid white;
+    -webkit-transition: border .25s linear, color .25s linear, background-color .25s linear;
+    transition: border .25s linear, color .25s linear, background-color .25s linear;
+}
+.blog-subscribe input[type="email"]{
+    color: #007AB0;
+}
+.blog-subscribe input:focus{
+    border: 2px solid #007AB0;
+    outline-offset: 0;
+    outline: none;
 }
 /***** PLAYER *****/
 
@@ -292,6 +335,12 @@ html body {
 .btn-play{
     color: #fff;
     background-color: #14679d;
+    position: absolute;
+    bottom: 3px;
+    left: 50%;
+    right: 50%;
+    min-width: 100px;
+    margin-left: -50px;
 }
 
 .btn-play .glyphicon{
