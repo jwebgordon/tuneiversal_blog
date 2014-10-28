@@ -72,7 +72,6 @@
         {% if last_page_num %}
         <a class="previous-posts-link" href="{{ blog_page_link(last_page_num) }}">Previous</a>
         {% endif %}
-        <a class="all-posts-link" href="{{ group.absolute_url }}/all">All posts</a>
         {% if next_page_num %}
         <a class="next-posts-link" href="{{ blog_page_link(next_page_num) }}">Next</a>
         {% endif %}
@@ -83,7 +82,7 @@
         <div class="span4 widget-span widget-type-rich_text about-blog">
             {% widget_block rich_text "about_this_blog" has_rows=False, label='About this blog', overrideable=False, __key='0', params_str="overrideable=False, label='About this blog' ", is_row=False %} 
             {% widget_attribute "html" %}
-            <p>Tuneiversal is all about posting awesome new music, no matter what genre. Wiz Khalifa has a new song out? Come find it here. Mumford and Sons just released a new album? Come read about is and listen to some songs here. Some old Beethoven B-Sides were just discovered? That you might not find here. But short of that, Tunieversal will post it!</p>
+            <p>Tuneiversal is your place to find awesome music, new and old. The artists and genres I'm listening to change on a day-to-day basis, and I bet I'm not alone in that. One day it's some Of Monsters and Men at work, the next it's some Lil Wayne (but definitely nothing since Tha Carter 3, amiright?). I can't guarantee you'll like everything here, but there's definitely something for everyone.</p>
             <p>Come check out all the artists you love, and hopefully find some new favorites too!</p>
             {% end_widget_attribute %} 
             {% end_widget_block %}
@@ -91,12 +90,17 @@
         <div class="span4 widget-span widget-type-rich_text social">
             {% widget_block rich_text "social_links" has_rows=False, label='Social Links', overrideable=False, __key='0', params_str="overrideable=False, label='Social Links' ", is_row=False %} 
             {% widget_attribute "html" %}
-            <h2>Follow Us!</h2>
+            <h3>Follow Us!</h3>
+            <div class="social-icons">
+                <a href="http://wwww.facebook.com/tuneiversal" target="_blank"><img src="http://cdn2.hubspot.net/hub/160982/file-731419725-png/images/social/32-facebook.png"></a>
+                <a href="http://www.twitter.com/tuneiversal" target="_blank"><img src="http://cdn2.hubspot.net/hub/160982/file-731419730-png/images/social/32-twitter.png"></a>
+                <a href="http://www.8tracks.com/tuneiversal" target="_blank"><img src="http://cdn2.hubspot.net/hub/160982/file-729577952-jpg/images/social/8tracks.jpg"></a>
+            </div>
             {% end_widget_attribute %} 
             {% end_widget_block %}
         </div>
         <div class="span4 widget-span widget-type-blog_subscribe blog-subscribe">
-            {% blog_subscribe "blog_subscription" has_rows=False, title='Get Tuneiversal Updates', response_message='Thanks for Subscribing!', label='Blog Email Subscription', overrideable=False, __key='0', params_str="label='Blog Email Subscription', overrideable=False, response_message='Thanks for Subscribing!', title='Get Tuneiversal Updates' ", is_row=False %}
+            {% blog_subscribe "blog_subscription" has_rows=False, title='New Song Notifications', response_message='Thanks for Subscribing!', label='Blog Email Subscription', overrideable=False, __key='0', params_str="label='Blog Email Subscription', overrideable=False, response_message='Thanks for Subscribing!', title='Get Tuneiversal Updates' ", is_row=False %}
         </div>
     </div>
 </div>
