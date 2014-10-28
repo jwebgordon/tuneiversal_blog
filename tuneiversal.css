@@ -9,6 +9,7 @@
 html body {
     background: #37352B;
     margin: 0px;
+    height: 0px!important;
 }
 
 /***** TOP ******/
@@ -61,22 +62,26 @@ html body {
 }
 
 .static-menu-outer{
-    height: 60px;
+    min-height: 60px;
 }
 
 .static-menu-container{
     width: 100%;
     background: #fff;
-    height: 60px;
+    min-height: 60px;
     z-index: 1000;
 }
 
 .static-menu{
-    height: 60px;
+    min-height: 60px;
 }
 
 .menu{
     margin-left: 0px!important;
+}
+
+.mobile-menu{
+    display: none;
 }
 
 .menu .hs-menu-wrapper.hs-menu-flow-horizontal>ul{
@@ -108,8 +113,7 @@ html body {
 }
 
 .menu ul li a:hover{
-    color: #fff;
-    background:#007AB0;
+    color: #007AB0!important;
 }
 
 .center-menu{
@@ -148,15 +152,45 @@ html body {
 
 .posts-wrapper .item{
     width: 33%;
+    float: left;
+    position: relative;
+    max-height: 300px;
+    cursor: pointer;
+}
+
+.overlay{  
+    background:rgba(0,0,0,.75);
+    text-align:center;    
+    opacity:0;
+    -webkit-transition: opacity .25s ease;   
+    -moz-transition: opacity .25s ease;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%
+}
+
+.item:hover .overlay {
+               opacity:1;}
+
+.item-play       {  font-family:Helvetica;
+               font-weight:900;
+               color:rgba(255,255,255,.85);
+               font-size:96px;}
+
+.item-play img{
+    margin-top: 14%;
 }
 
 .posts-wrapper .item .item-inner{
     min-height: 200px;
     text-align: center;
+    position: relative;
 }
 
 .post.item:nth-child(even){
-    background: #fff
+    background-color: #fff
 }
 
 .post.item:nth-child(even) .post-title{
@@ -172,12 +206,17 @@ html body {
 }
 
 .title-wrapper{
-    height: 25px;
+    min-height: 25px;
 }
 
 .post-title{
     color: #fff;
     font-weight: 400;
+    font-size: 20px;
+}
+
+.post-title::first-line{
+    font-size: 1.3em;
 }
 
 .author-wrapper{
@@ -189,7 +228,7 @@ html body {
 }
 
 .content-wrapper{
-    height: 80px;
+    height: 70px;
     line-height: 80px;
     color: #fff;
     padding: 4px;
@@ -205,25 +244,71 @@ html body {
     display: none;
 }
 
+.youtube-container{
+    position: absolute;
+bottom: 0;
+right: 0;
+z-index: 10000000;
+width: 1px;
+height: 1px;
+}
+
 /***** FOOTER *****/
 .below-posts{
+    clear: both;
     max-width: 80%;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 50px;
+    margin-top: 150px;
+    padding-top: 200px;
 }
 
 .about-blog{
-    color: #14679d;
+    color: #fff;
 }
 
 .social{
     text-align: center;
-    color: #14679d;
+    color: #fff;
 }
 
 .blog-subscribe{
-    color: #14679d;
+    color: #fff;
+}
+
+.blog-subscribe .hs-button{
+    display: inline-block;
+    margin-bottom: 0;
+    font-weight: normal;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    background-image: none;
+    background-color: #007AB0;
+    margin-top: 8px;
+    border: 1px solid transparent;
+    white-space: nowrap;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.blog-subscribe input{
+    border: 2px solid white;
+    -webkit-transition: border .25s linear, color .25s linear, background-color .25s linear;
+    transition: border .25s linear, color .25s linear, background-color .25s linear;
+}
+.blog-subscribe input[type="email"]{
+    color: #007AB0;
+}
+.blog-subscribe input:focus{
+    border: 2px solid #007AB0;
+    outline-offset: 0;
+    outline: none;
 }
 /***** PLAYER *****/
 
@@ -292,6 +377,12 @@ html body {
 .btn-play{
     color: #fff;
     background-color: #14679d;
+    position: absolute;
+    bottom: 3px;
+    left: 50%;
+    right: 50%;
+    min-width: 100px;
+    margin-left: -50px;
 }
 
 .btn-play .glyphicon{
@@ -304,5 +395,74 @@ html body {
 @media (max-width: 1300px){
     .posts-wrapper{
         width: 100%!important;
+        height: auto;
     }
 }
+
+@media (max-width: 480px){
+    .top-outer{
+        display: none;
+    }
+
+    .static-menu-container{
+        position: fixed!important;
+    }
+
+    .menu{
+        display: none;
+    }
+
+    .mobile-menu{
+        display: block;
+        float: left;
+    }
+
+    .mobile-menu.mobile-menu-icon {
+        width: 10%;
+        margin-top: 20px;
+        font-size: 20px;
+    }
+
+    .mobile-menu.mobile-menu-name {
+        width: 65%;
+    }
+    .mobile-menu.mobile-menu-name h1{
+        margin-top: 11px;
+    }
+
+    .menu-icon{
+        float: left;
+    }
+
+    .mobile-menu.mobile-menu-content{
+        display: none;
+        width: 100%;
+    }
+
+    .mobile-menu-content ul {
+        list-style: none;
+        text-align: left;
+    }
+
+    .mobile-menu-content li {
+        margin-top: 6px;
+    }
+    .mobile-menu-content a {
+        font-size: 18px;
+    }
+
+    .menu-open{
+        margin-top: 134px;
+    }
+}
+
+/*
+  [hubspot-metadata]
+{
+"category": "asset", 
+"creatable": true, 
+"path": "custom/blog/css/tuneiversal.css"
+}
+[end-hubspot-metadata]
+
+*/

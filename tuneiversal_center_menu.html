@@ -60,7 +60,10 @@
                     <div class="content-wrapper">
                         <p>{{ content.post_list_content|safe }}</p>    
                     </div>
-                    <div class="play-track btn btn-play" data-url="{{ content.absolute_url }}"><span class="glyphicon glyphicon-play"></span>Play It</div>
+                    
+                </div>
+                 <div class="overlay">
+                    <span class="item-play" data-url="{{ content.absolute_url}}"><img src="http://www.tuneiversal.com/hs-fs/hub/160982/file-625113038-png/images/player_controls/play.png"></span>
                 </div>
             </div>
             {% endfor %}
@@ -150,7 +153,7 @@
 {
     "category": "blog", 
     "creatable": true, 
-    "path": "custom/blog/new/tuneiversal_center_menu.html"
+    "path": "custom/blog/custom/tuneiversal_center_menu.html"
 }
 [end-hubspot-metadata]
 -->

@@ -44,8 +44,19 @@
 
     PostView.prototype.el = $(".post.item");
 
-    PostView.prototype.events = {
-      "click .play-track": "play"
+    PostView.prototype.events = function() {
+      var eventsHash, isMobile;
+      isMobile = navigator.userAgent.match(/(iPhone|iPod|iPad|Android|BlackBerry)/);
+      eventsHash = {};
+      if (isMobile) {
+        return _.extend(eventsHash, {
+          "click .mobile-play": "play"
+        });
+      } else {
+        return _.extend(eventsHash, {
+          "click": "play"
+        });
+      }
     };
 
     PostView.prototype.initialize = function() {
@@ -59,6 +70,7 @@
 
     PostView.prototype.play = function() {
       console.log("clicked play " + (this.model.get("title")));
+      console.log("" + (this.model.get("url")));
       this.song_ready = new $.Deferred();
       $.ajax(this.model.get("url"), {
         type: "GET",
@@ -110,7 +122,7 @@
         var post_model, post_view;
         post_model = new Post({
           title: $(el).find("h3.post-title").text(),
-          url: $(el).find(".play-track").data("url")
+          url: $(el).find(".item-play").data("url")
         });
         Tuneiversal.Collections.Posts.add(post_model);
         return post_view = new PostView({

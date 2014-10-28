@@ -13,7 +13,14 @@ class PostView extends Backbone.View
    el: $ ".post.item"   
 
    events:
-      "click .play-track": "play"
+      () ->
+         isMobile = navigator.userAgent.match(/(iPhone|iPod|iPad|Android|BlackBerry)/)
+         eventsHash = {}
+         if isMobile
+            _.extend eventsHash, "click .mobile-play": "play"
+         else
+            _.extend eventsHash, "click": "play"
+
 
    initialize: ->
       @model.view = @
@@ -24,6 +31,7 @@ class PostView extends Backbone.View
 
    play: ->
       console.log "clicked play #{@model.get("title")}"
+      console.log "#{@model.get("url")}"
       @song_ready = new $.Deferred()
       $.ajax @model.get("url"),
          type: "GET"
@@ -59,7 +67,7 @@ class BlogView extends Backbone.View
       _.each $(".post.item"), (el) ->
          post_model = new Post
             title: $(el).find("h3.post-title").text()
-            url:  $(el).find(".play-track").data("url")
+            url:  $(el).find(".item-play").data("url")
          Tuneiversal.Collections.Posts.add post_model
          post_view = new PostView model: post_model, el: el
 
@@ -129,6 +137,14 @@ Tuneiversal.Views.player_view = new PlayerView
 
 
 
+# # 
+# [hubspot-metadata]
+# {
+#    "path": "custom/pages/my-folder/my-file.html",
+#    "category": "page",
+#    "creatable": false            
+# }
+# [end-hubspot-metadata]
 
 
    
